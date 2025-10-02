@@ -1,0 +1,47 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ollama_models:/root/.ollama
+    ports:
+      - "11434:11434"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://0.0.0.0:11434/api/tags"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  ollama-init:
+    image: curlimages/curl:latest
+    container_name: ollama-init
+    depends_on:
+      ollama:
+        condition: service_started
+    volumes:
+      - ollama_models:/root/.ollama
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      'echo "Waiting for Ollama API...";
+       until curl -s -f http://ollama:11434/api/tags >/dev/null 2>&1; do
+         echo "Still waiting..."; sleep 3;
+       done;
+       echo "Ollama is up! Pulling mistral:7b-instruct...";
+       curl -s -X POST http://ollama:11434/api/pull -H "Content-Type: application/json" -d "{\"name\":\"mistral:7b-instruct\"}";
+       echo "Model pull complete."'
+    restart: "no"
+
+  deutsch-app:
+    image: deutsch-agent:1.0.1
+    container_name: deutsch-app
+    depends_on:
+      ollama-init:
+        condition: service_completed_successfully
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    ports:
+      - "8501:8501"
+
+volumes:
+  ollama_models:

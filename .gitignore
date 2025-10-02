@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+venv/
+.env
+
+# Docker
+*.log
+*.pid
+*.sock
+docker-compose.override.yml
+
+# Ollama models
+ollama_models/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Byte-compiled / cache files
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Any local configuration
+*.local
