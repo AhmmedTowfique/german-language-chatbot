@@ -1,28 +1,60 @@
 # 🇩🇪 Deutsch Learning Agent
 
-An interactive **German learning agent**, built with **Streamlit** and **Ollama**.  
-The agent corrects your German sentences, explains mistakes briefly, and continues the conversation in **German only**.
+An interactive German language assistant that helps you practice German through conversation. Built with Streamlit and powered by Ollama running Mistral 7B locally — fully containerized with Docker.
 
 ---
 
-## 📦 Requirements
+## What It Does
 
-- [Docker](https://docs.docker.com/get-docker/)  
-- [Docker Compose](https://docs.docker.com/compose/install/)
+- Chat with an AI agent that responds only in German
+- Corrects your German sentences and explains mistakes
+- Teaches vocabulary in context — for example, ask it about the days of the week (Montag, Dienstag, Mittwoch...) and it walks you through them
+- Runs entirely locally — no API keys, no cloud costs
 
 ---
 
-## 🚀 Getting Started
+## Tech Stack
 
-1. Clone this repository and start the application (this builds the images and runs the containers):
+| Component | Tool |
+|---|---|
+| Frontend | Streamlit |
+| LLM | Mistral 7B Instruct (via Ollama) |
+| Containerization | Docker, Docker Compose |
+| Language | Python |
 
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/deutsch-agent.git
-   cd deutsch-agent
-   docker compose up
-   # Note: On the first run Ollama will automatically download the model "mistral:7b-instruct" (~4 GB).
-   # This may take a few minutes the first time.
-   # After the services are up, open http://localhost:8501 in your browser.
-   ```
-## 🛑 Stop the App
-    docker compose down
+---
+
+## Getting Started
+
+### Prerequisites
+- Docker & Docker Compose installed
+
+### Run
+
+```bash
+git clone https://github.com/AhmmedTowfique/deutsch-language-agent.git
+cd deutsch-language-agent
+docker compose up
+```
+
+> On first run, Ollama will download the Mistral 7B model (~4 GB). This may take a few minutes.
+
+Open [http://localhost:8501](http://localhost:8501) in your browser.
+
+### Stop
+
+```bash
+docker compose down
+```
+
+---
+
+## Why I Built This
+
+I'm learning German and wanted to experiment with running open-source LLMs locally using Ollama. This was a weekend project to combine language learning with hands-on Docker and AI experimentation — not a production app, just a fun side project.
+
+---
+
+## Status
+
+🧪 Experimental — works for basic conversations and vocabulary practice, but not fully polished. Built for learning and tinkering.
